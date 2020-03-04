@@ -1,0 +1,90 @@
+/**********************************************************************************
+* 
+*   Copyright (C) 2018 MuK IT GmbH
+*    		
+*   Odoo Proprietary License v1.0
+*   This software and associated files (the "Software") may only be used 
+*	(executed, modified, executed after modifications) if you have
+*	purchased a valid license from the authors, typically via Odoo Apps,
+*	or if you have received a written agreement from the authors of the
+*	Software (see the COPYRIGHT file).
+*	
+*	You may develop Odoo modules that use the Software as a library 
+*	(typically by depending on it, importing it and using its resources),
+*	but without copying any source code or material from the Software.
+*	You may distribute those modules under the license of your choice,
+*	provided that this license is compatible with the terms of the Odoo
+*	Proprietary License (For example: LGPL, MIT, or proprietary licenses
+*	similar to this one).
+*	
+*	It is forbidden to publish, distribute, sublicense, or sell copies of
+*	the Software or modified copies of the Software.
+*	
+*	The above copyright notice and this permission notice must be included
+*	in all copies or substantial portions of the Software.
+*	
+*	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+*	OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+*	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+*	THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+*	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+*	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+*	DEALINGS IN THE SOFTWARE.
+*
+**********************************************************************************/
+
+.o_form_editable {
+	.o_field_widget.oe_fileupload {
+		width: 100%;
+		position: relative;
+		.oe_attachments {
+			min-height: 200px;
+			position: relative;
+			&.mk_dropzone_attachments {
+				&:before {
+					display:flex;
+					z-index: 1052;
+					color: gray('700');
+					flex-direction:row;
+					align-items: center;
+					justify-content: center;
+					border: 2px dashed gray('700');
+					font-family: FontAwesome;
+				    text-decoration: inherit;
+				    font-style: normal;
+				    font-weight: normal;    
+				    font-size: 8rem;
+				    content: "\f0ee";
+					@include gradient-y($white, gray('100'));
+				}
+				&:after {
+					display:flex;
+					z-index: 1052;
+					font-size: 2rem;
+					color: gray('700');
+					padding-top: 10rem;
+					flex-direction:row;
+					align-items: center;
+					justify-content: center;
+					width: #{"calc(100% - 20px)"};
+					height: #{"calc(100% - 20px)"};
+				    content: attr(data-dropzone-text);
+					@include o-position-absolute(10px, 0, 0, 10px);
+				}
+			}
+			&.mk_attachments_empty:not(.mk_dropzone_attachments)  {
+				@extend .mk_dropzone;
+				@extend .mk_dropzone_file;
+				@extend .mk_dropzone_attachments;
+		    	&:before {
+		    		z-index: 1020;
+		    		border: none;
+		    		background: none;
+	    		}
+		    	&:after {
+		    		z-index: 1020;
+	    		}
+	    	}
+		}
+	}
+}
